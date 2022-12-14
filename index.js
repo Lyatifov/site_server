@@ -1,7 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
-import path from "path"
+// import path from "path"
 
 import ApiRouter from "./router/ApiRouter.js"
 
@@ -14,12 +14,17 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('public'))
 
-
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '/index.html'))
-})
-
+app.use((req, res) => res.sendFile(`${__dirname}/index.html`))
 app.use("/api", ApiRouter)
+
+
+
+
+// app.use("/*", function (req, res) {
+//     res.sendFile(path.join(__dirname, '/index.html'))
+// })
+
+
 
 async function start() {
     try {
